@@ -14,7 +14,7 @@ export default class PostTrade extends Component {
     console.log(this.state.locations);
     return (
       <div>
-        Posttrade
+      
         <div className="tradeform-container">
           <form>
             <div class="form-group">
