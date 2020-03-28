@@ -1,0 +1,19 @@
+.profilepic{
+  width: 80px;
+  border-radius: 100%;
+
+}
+
+.profile-info {
+  margin: auto;
+  width: 900px;
+  text-align: center;
+  margin-bottom: 70px;
+  margin-top:70px;
+}
+
+h2 {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
