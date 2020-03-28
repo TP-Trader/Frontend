@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
+import history from './utils/history';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import {ProductProvider } from './context'
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
-import history from "./utils/history";
 import * as serviceWorker from './serviceWorker';
 
 
@@ -27,7 +27,7 @@ ReactDOM.render(
   onRedirectCallback={onRedirectCallback}
 >
   <ProductProvider>
-    <Router>
+    <Router history={history}>
       <App />
     </Router>
   </ProductProvider>
