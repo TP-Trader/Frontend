@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
+import { useAuth0 } from "./react-auth0-spa";
 import Header from "./layout/header/header";
 import Footer from "./layout/footer/Footer";
 import Landing from "./views/landing/Landing";
@@ -11,6 +12,13 @@ import Profile from "./views/profile/Profile";
 import Notfound from "./layout/notfound/Notfound";
 
 function App() {
+
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Fragment className="App">
       <Header />
