@@ -14,6 +14,7 @@ export default class Landing extends Component {
     return (
       <div classname="landing-container">
         <div>
+          <Link to="/posttrade">Create Post</Link>
           <form className="city-form">
             <div class="form-group">
               <label for="exampleFormControlSelect1">Enter City</label>

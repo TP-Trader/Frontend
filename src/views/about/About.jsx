@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { states, locations, cities } from "../../data";
-import './offer.css'
+import './about.css'
 
 export default class Offer extends Component {
   state = {
