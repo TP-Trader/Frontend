@@ -1,5 +1,4 @@
 import React from "react";
-import { useAuth0 } from "../../react-auth0-spa";
 import "./header.css";
 import { Link } from "react-router-dom";
 import Logo from "../../assetts/tplogotransparent.png";
