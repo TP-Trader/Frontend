@@ -1,22 +1,27 @@
 import {
-  POST_ERROR,
-  POST_ADDED,
+  //register
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  
+  POST_ERROR,
+  POST_ADDED,
   POSTS_LOADED,
   GET_POSTS,
   AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
+  
   LOGOUT
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: null,
+  isAuthenticated: false,
   loading: true,
   user: null,
-  posts: null
+  posts: null,
+  responses: null
 };
 
 export default function(state = initialState, action) {

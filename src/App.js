@@ -13,12 +13,14 @@ import Profile from "./views/profile/Profile";
 import Notfound from "./layout/notfound/Notfound";
 import About from "./views/about/About";
 import Footer from "./layout/footer/Footer";
+import Alert from './layout/alerts/alert'
 
 
 const App = () => {
   return (
     <Fragment className="App">
       <Header />
+      <Alert/>
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />

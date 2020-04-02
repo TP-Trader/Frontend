@@ -1,8 +1,8 @@
-import uuid from 'uuid';
+import uuid from 'react-uuid' //randomly generates an id for the newly dispatched alert
 import {SET_ALERT, REMOVE_ALERT} from './types' ;
 
 export const setAlert = (msg, alertType, timeout = 4000) => dispatch =>{
-const id = uuid.v4();
+const id = uuid();
 dispatch({
   type: SET_ALERT,
   payload: {msg, alertType, id}
