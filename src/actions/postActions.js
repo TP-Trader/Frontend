@@ -1,23 +1,18 @@
-import axios from 'axios';
-import { setAlert } from './alert';
-import { GET_POSTS, POST_ADDED, POSTS_ERROR } from './types';
+import axios from "axios";
+import { setAlert } from "./alertActions";
+import { GET_POSTS, POST_ADDED, POST_ERROR } from "./types";
 // import setAuthToken from '../utils/setAuthToken';
 
 //LOAD POSTS
 export const loadPosts = () => async dispatch => {
-
   try {
-    const res = await axios.get('/api/posts')
-
+    const res = await axios.get("http://localhost:4000/api/landing/");
     dispatch({
       type: GET_POSTS,
       payload: res.data
     });
   } catch (err) {
-    dispatch({
-      type: POSTS_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
-    });
+    console.log(err)
   }
 };
 
@@ -36,7 +31,7 @@ export const postAdded = ({
 }) => async dispatch => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   };
   const body = JSON.stringify({
@@ -53,11 +48,7 @@ export const postAdded = ({
   });
 
   try {
-    const res = await axios.post(
-      '/api/posts',
-      body,
-      config
-    );
+    const res = await axios.post("/api/posts", body, config);
 
     dispatch({
       type: POST_ADDED,
@@ -68,11 +59,11 @@ export const postAdded = ({
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
 
     dispatch({
-      type: POSTS_ERROR
+      type: POST_ERROR
     });
   }
 };

@@ -2,15 +2,26 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import MostRecent from "./mostrecent.json";
 import "./landing.css";
+import { connect } from "react-redux";
 import { states, locations, cities } from "../../data";
+import { setAlert } from "../../actions/alertActions";
+import { loadPosts } from "../../actions/postActions";
 
-export default class Landing extends Component {
+import PropTypes from "prop-types";
+
+class Landing extends Component {
   state = {
     mostRecent: MostRecent,
     cities: cities
   };
+
+  componentDidMount = () => {
+    this.props.loadPosts();
+  };
+
   render() {
-    console.log(this.state.mostRecent);
+    console.log(this.state.posts);
+    console.log(this.props.posts)
     return (
       <div classname="landing-container">
         <div>
@@ -31,19 +42,19 @@ export default class Landing extends Component {
           <div class="container most-recent">
             <div class="row head-row">
               <div class="col">#</div>
-              <div class="col">Location</div>
-              <div class="col">Offer</div>
-              <div class="col">Need</div>
-              <div class="col">flexibility</div>
+              <div class="col">City</div>
+              <div class="col">Need/Offer</div>
+              <div class="col">Item(s)</div>
+              <div class="col">Description</div>
               <div class="col">trade</div>
             </div>
-            {this.state.mostRecent.map((recent, i) => (
-              <div class="row row-color" key={i}>
-                <div class="col">{recent.id}</div>
-                <div class="col">{recent.location}</div>
-                <div class="col">{recent.offer}</div>
-                <div class="col">{recent.need}</div>
-                <div class="col">{recent.flexibility}</div>
+            {this.props.posts.map(post => (
+              <div class="row row-color" key={post.id}>
+                <div class="col">{post.id}</div>
+                <div class="col">{post.postsCity}</div>
+                <div class="col">{post.type}</div>
+                <div class="col">{post.desiredItem}</div>
+                <div class="col">{post.description}</div>
                 <div class="col">
                   <Link to="/offer">click to trade</Link>
                 </div>
@@ -55,3 +66,15 @@ export default class Landing extends Component {
     );
   }
 }
+
+Landing.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  loadPosts: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.authReducer,
+  posts: state.postsReducer.posts
+});
+
+export default connect(mapStateToProps, { setAlert, loadPosts })(Landing);

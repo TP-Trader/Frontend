@@ -5,8 +5,9 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  GET_PROFILE,
   GET_POSTS,
-  POST_ADDED,
+  // POST_ADDED,
   POST_ERROR,
   AUTH_ERROR,
   LOGOUT
@@ -48,6 +49,11 @@ export const register = ({ email, password }) => async dispatch => {
 
 //Login User
 export const login = ({ email, password }) => async dispatch => {
+  const config = {
+    headers:{
+      'Content-Type':'application/json'
+    }
+  }
   const body = {
     email: email,
     password: password
@@ -57,7 +63,7 @@ export const login = ({ email, password }) => async dispatch => {
   try {
     const res = await axios.post(
       "http://localhost:4000/api/auth/login",
-      body
+      body, config
     );
     console.log(res.data);
     dispatch({
@@ -66,7 +72,6 @@ export const login = ({ email, password }) => async dispatch => {
     });
     dispatch(setAlert("Logged in! ", "success"));
   } catch (err) {
-    // const errors = err.response.data.errors;
     console.log(err);
     if (err) {
       console.log(err)
@@ -74,13 +79,10 @@ export const login = ({ email, password }) => async dispatch => {
     }
 
     dispatch({
-      type: REGISTER_FAIL
+      type: LOGIN_FAIL
     });
   }
 };
-
-
-
 
 
 
@@ -102,6 +104,28 @@ export const loadPosts = () => async dispatch => {
     });
   }
 };
+
+//LOAD USER
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get(
+      '/api/users'
+    );
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    });
+  }
+};
+
 
 // //Post Recipe
 // export const postRecipe = ({
@@ -159,26 +183,6 @@ export const loadPosts = () => async dispatch => {
 //   }
 // };
 
-// //LOAD USER
-// export const loadChef = () => async dispatch => {
-//   if (localStorage.token) {
-//     setAuthToken(localStorage.token);
-//   }
-//   try {
-//     const res = await axios.get(
-//       '/api/users'
-//     );
-
-//     dispatch({
-//       type: USER_LOADED,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: AUTH_ERROR
-//     });
-//   }
-// };
 
 //LOGOUT
 export const logout = () => dispatch => {

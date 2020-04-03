@@ -1,23 +1,34 @@
-// REACT
-import React from "react";
-import { Route, Redirect, withRouter } from "react-router";
-// REDUX
-import { connect } from "react-redux";
-// -- *** -- START CODE -- *** -- //
-// -- *** -- START CODE -- *** -- //
-const PrivateRoute = ({ component: Component, token, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props => (token ? <Component {...props} /> : <Redirect to="/" />)}
-    />
-  );
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+const Privateroute = ({
+  component: Component,
+  auth: { isAuthenticated, loading },
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={props =>
+      !isAuthenticated && !loading ? (
+        <Redirect to="/login" />
+      ) : (
+        <Component {...props} />
+      )
+    }
+  />
+);
+
+Privateroute.propTypes = {
+  auth: PropTypes.object.isRequired
 };
-// MAP STATE TO PROPS
-const mapStateToProps = state => {
-  return {
-    token: localStorage.getItem("Authorization")
-  };
-};
-// CONNECT
-export default withRouter(connect(mapStateToProps, {})(PrivateRoute));
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Privateroute);

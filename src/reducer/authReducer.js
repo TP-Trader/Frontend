@@ -6,24 +6,29 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
 
+  LOGOUT,
+
+  GET_PROFILE,
+  PROFILE_ERROR,
+
   POST_ERROR,
   POST_ADDED,
   POSTS_LOADED,
   GET_POSTS,
-  AUTH_ERROR,
-  
-  LOGOUT
+  AUTH_ERROR
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  redir:false,
+  redir: false,
   isAuthenticated: false,
   loading: true,
   user: null,
   posts: null,
   responses: null
 };
+
+
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
@@ -37,10 +42,21 @@ export default function(state = initialState, action) {
       };
 
     case GET_POSTS:
+      console.log(payload)
       return {
         ...state,
         isAuthenticated: true,
         posts: payload
+      };
+
+    case GET_PROFILE:
+      console.log(state.user)
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+        user: payload
       };
 
     case POSTS_LOADED:
@@ -57,13 +73,15 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: false,
-        redir:true,
+        redir: true,
         loading: false
       };
 
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
-      console.log(payload)
+      localStorage.setItem("email", payload.email);
+      localStorage.setItem("id", payload.id)
+      console.log(payload);
       return {
         ...state,
         ...payload,
@@ -84,6 +102,8 @@ export default function(state = initialState, action) {
     case LOGIN_FAIL:
     case LOGOUT:
       localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("id");
       return {
         ...state,
         token: null,
