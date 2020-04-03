@@ -45,35 +45,41 @@ export const register = ({ email, password }) => async dispatch => {
   }
 };
 
-//Login user
-export const login = (email, password) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
 
-  const body = { email: email, password: password };
+//Login User
+export const login = ({ email, password }) => async dispatch => {
+  const body = {
+    email: email,
+    password: password
+  };
+  console.log(body);
 
   try {
-    const res = await axios.post("http://localhost:4000/api/auth/login", body, config);
-
+    const res = await axios.post(
+      "http://localhost:4000/api/auth/login",
+      body
+    );
+    console.log(res.data);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data //token is in here
+      payload: res.data
     });
+    dispatch(setAlert("Logged in! ", "success"));
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+    // const errors = err.response.data.errors;
+    console.log(err);
+    if (err) {
+      console.log(err)
+      dispatch(setAlert(`Incorrect email or password`, "danger"));
     }
 
     dispatch({
-      type: LOGIN_FAIL
+      type: REGISTER_FAIL
     });
   }
 };
+
+
 
 
 

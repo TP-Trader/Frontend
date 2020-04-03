@@ -10,8 +10,7 @@ import PropTypes from 'prop-types'
 const Login = ({setAlert, login, auth, history}) => {
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-    authenticated: false
+    password: ""
   });
 
   const { email, password } = formData;
@@ -23,14 +22,11 @@ const Login = ({setAlert, login, auth, history}) => {
   const onSubmit = e => {
     e.preventDefault();
     login({email, password})
-    // checkAuth()
+    console.log(`auth.isAuthorized: ${auth.isAuthenticated}`)
   };
 
-  // console.log(auth.isAuthenticated)
-  // const checkAuth=()=>{
-  //   setTimeout(() => auth.isAuthenticated ? history.push('/') : setAlert("Email or Password is incorrect", "danger"), 50)
-  // }
-
+  
+  auth.isAuthenticated && setTimeout(() => history.push('/'), 400)
 
   return (
     <Fragment>
@@ -66,6 +62,8 @@ const Login = ({setAlert, login, auth, history}) => {
 };
 
 Login.propTypes ={
+  setAlert:PropTypes.func.isRequired,
+  login:PropTypes.func.isRequired,
   auth: PropTypes.array.isRequired
 }
 
@@ -73,4 +71,4 @@ const mapStateToProps = state => ({
   auth: state.authReducer
 });
 
-export default connect(mapStateToProps, {login, setAlert})(Login);
+export default connect(mapStateToProps, { setAlert, login })(Login);
