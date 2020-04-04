@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
-
 import Header from "./layout/header/header";
 import Login from './views/login-reg/Login'
 import Register from './views/login-reg/Register'
