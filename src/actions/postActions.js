@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alertActions";
-import { GET_POSTS, POST_ADDED, POST_ERROR } from "./types";
+import { GET_POSTS, POST_ADDED, POST_ERROR , GET_FILTERED_POSTS, GET_USER_POSTS} from "./types";
 // import setAuthToken from '../utils/setAuthToken';
 
 //LOAD POSTS
@@ -9,6 +9,32 @@ export const loadPosts = () => async dispatch => {
     const res = await axios.get("http://localhost:4000/api/landing/");
     dispatch({
       type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+//LOAD FILTERED POSTS
+export const filteredPosts = (state) => async dispatch => {
+  try {
+    const res = await axios.get("http://localhost:4000/api/landing/");
+    dispatch({
+      type: GET_FILTERED_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+//LOAD USER POSTS
+export const userPosts = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`http://localhost:4000/api/posts/${id}`);
+    dispatch({
+      type: GET_USER_POSTS,
       payload: res.data
     });
   } catch (err) {

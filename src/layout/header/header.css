@@ -1,23 +1,50 @@
 .logo {
-  width: 100px;
-}
-
-.title{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: -70px;
+  width: 32px;
+  padding-top: 5px;
 }
 
 .header-container {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   align-content: center;
   align-items: center;
-  justify-content: space-between;
-  width: 1000px;
+  width: 100%;
   margin: auto;
-  padding: 12px;
-
-
+  background-color: rgb(251, 255, 255);
+  
 }
+
+.title-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(244, 250, 250);
+  margin: auto;
+  width: 25%;
+  min-width: 400px;
+  max-width: 900px;
+}
+
+.logo-box{
+  display: flex;
+  justify-content: center;
+}
+
+.logo-box h1{
+ font-size: 30px;
+}
+
+#title-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+
+
+
+

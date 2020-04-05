@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { states, locations, cities } from "../../data";
+import { cities } from "../../data";
 import './about.css'
 
 export default class Offer extends Component {
   state = {
-    states: states,
+  
     cities: cities,
-    locations: locations
+  
   };
 
   render() {

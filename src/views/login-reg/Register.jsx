@@ -42,7 +42,7 @@ const Register = ({setAlert, register, auth, history}) => {
             name="email"
             value={email}
             onChange={e => onChange(e)}
-           
+            required
           />
         </div>
         <div>

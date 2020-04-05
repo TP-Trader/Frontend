@@ -1,7 +1,81 @@
+
 .footer-container {
-  text-align: center;
-  background-color: gray;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  padding: 12px;
+  background-color: rgb(251, 255, 255);
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  box-shadow: 0 1px 8px rgb(45, 45, 55);
+  height: 90px;
+}
+
+.footer-button-container{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  background-color: none;
+  margin: auto;
+  width: 100%;
+  min-width: 400px;
+  max-width: 900px;
+  padding-top: 25px;
+}
+
+.button{
+  border: 2px solid rgb(174, 88, 245);
+  border-radius: 6px;
+  padding: 10px;
+
+}
+
+.logout-btn{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  color: rgb(174, 88, 245);;
+}
+
+.login-btn{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  width: 30%;
+  min-width: 200px;
+  margin: auto;
+  color: rgb(174, 88, 245);
+  font-weight: 500;
 }
 
 
+.login-btn a, .login-btn a:hover, a:focus, .login-btn a:active {
+  text-decoration: none;
+  color: rgb(174, 88, 245);
+}
 
+.logout-btn a, .logout-btn a:hover, a:focus, .logout-btn a:active {
+  text-decoration: none;
+}
+
+#register{
+  color: white;
+  background-color: #6558F5;
+  padding: 10px;
+  border: none;
+}
+
+.copywrite{
+  font-size: 10px;
+  margin-top: -10px;
+}

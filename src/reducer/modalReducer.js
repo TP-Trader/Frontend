@@ -1,18 +1,32 @@
-import { GET_POSTS, POST_ERROR, GET_FILTERED_POSTS, GET_USER_POSTS } from "../actions/types";
+import {
+  LOGIN_OPEN, LOGIN_CLOSE, REGISTER_OPEN, REGISTER_CLOSE
+} from "../actions/types";
 
 const initialState = {
-  user: null,
-  loading: true,
-  error: {},
-  posts: [],
+  modalShow: false,
+  testing:true
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
-  console.log(state.posts, state.loading);
+  console.log(state.modalShow);
 
   switch (type) {
-    case GET_POSTS:
+    case LOGIN_OPEN:
+      console.log(payload);
+      return {
+        ...state,
+        modalShow: true,
+      };
+
+    case LOGIN_CLOSE:
+      console.log(payload);
+      return {
+        ...state,
+        modalShow: false,
+      };
+
+    case REGISTER_OPEN:
       console.log(payload);
       return {
         ...state,
@@ -20,23 +34,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
 
-    case GET_FILTERED_POSTS:
-      console.log(payload);
-      return {
-        ...state,
-        posts: payload,
-        loading: false,
-      };
-
-    case GET_USER_POSTS:
-      console.log(payload);
-      return {
-        ...state,
-        posts: payload,
-        loading: false,
-      };
-
-    case POST_ERROR:
+    case REGISTER_CLOSE:
       return {
         ...state,
         error: payload,
@@ -47,3 +45,4 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
