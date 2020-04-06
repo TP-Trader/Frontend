@@ -5,6 +5,8 @@ import {
 
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGIN_MODAL_OPEN,
+  LOGIN_MODAL_CLOSE,
 
   LOGOUT,
 
@@ -25,7 +27,8 @@ const initialState = {
   loading: true,
   user: null,
   posts: null,
-  responses: null
+  responses: null,
+  loginModalOpen: false
 };
 
 
@@ -75,6 +78,25 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         redir: true,
         loading: false
+      };
+
+    case LOGIN_MODAL_OPEN:
+      console.log(payload);
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: false,
+        loading: false,
+        loginModalOpen:true
+      };
+
+    case LOGIN_MODAL_CLOSE:
+      console.log(payload);
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        loginModalOpen:false
       };
 
     case LOGIN_SUCCESS:

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alertActions";
-import { login } from "../../actions/authActions";
+import { login,  } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Alert from "../../layout/alerts/alert";
 import "./login.css";
@@ -29,7 +29,7 @@ const LoginModal = ({ setAlert, login, auth, history }) => {
   // auth.isAuthenticated && setTimeout(() => history.push('/'), 400)
 
   return (
-    <div className="loginModal-off">
+    <div className={auth.loginModalOpen === true ? "loginModal" :"loginModal-off"}>
       <div className="loginModal-container"></div>
       <div className="modalbox">
         <form className="modal-form" onSubmit={(e) => onSubmit(e)}>

@@ -16,21 +16,36 @@ const Header = ({ auth, logout, history }) => {
     !localStorage.token && logout();
   };
 
-  const currentDateAndTime = new Date().toLocaleString();
+  // const currentDateAndTime = new Date().toLocaleString();
+  const today = new Date();
+  const date =
+    today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+
+  // " " +
+  // today.getHours() +
+  // ":" +
+  // today.getMinutes() +
+  // ":" +
+  // today.getSeconds();
+  const time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   return (
     <div className="header-container">
       <div className="title-container">
-      {currentDateAndTime}
+        <div className='clock'>
+        <p>{date} <br/>{time}</p>
+       </div>
+        
+
         <div className="logo-box">
-        <Link to="/">
-          <img src={Logo} alt="TP Logo" className="logo" />
-        </Link>
-        <h1>Tp Trader</h1>
+          <Link to="/">
+            <img src={Logo} alt="TP Logo" className="logo" />
+          </Link>
+          <h1>Tp Trader</h1>
         </div>
-        
-        
-        {localStorage.token && <h6>Welcome, {localStorage.email}</h6>}
+
+        {localStorage.token ? <p className='welcome'>Welcome,<br/> {localStorage.email}</p> : <div></div>}
       </div>
     </div>
   );

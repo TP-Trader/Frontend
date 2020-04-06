@@ -10,6 +10,7 @@
   align-content: center;
   align-items: center;
   width: 100%;
+  /* max-width: 100px; */
   margin: auto;
   background-color: rgb(251, 255, 255);
   
@@ -17,14 +18,16 @@
 
 .title-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(244, 250, 250);
   margin: auto;
-  width: 25%;
+  width: 100%;
   min-width: 400px;
-  max-width: 900px;
+  padding-left: 10px;
+  padding-right:10px;
+  /* max-width: 900px; */
 }
 
 .logo-box{
@@ -44,7 +47,14 @@
   min-width: 100px;
 }
 
+.clock{
+  font-size: 11px;
+  text-align: left;
+}
 
-
+.welcome{
+  text-align: right;
+  font-size: 11px;
+}
 
 

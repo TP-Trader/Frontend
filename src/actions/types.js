@@ -14,12 +14,10 @@ export const GET_POSTS = "GETALLPOSTS";
 export const GET_FILTERED_POSTS = "GET_FILTERED_POSTS";
 export const GET_USER_POSTS = "GET_USER_POSTS";
 
-export const LOGIN_OPEN = "LOGIN_OPEN";
-export const LOGIN_CLOSE = "LOGIN_CLOSE";
+export const LOGIN_MODAL_OPEN = "LOGIN_MODAL_OPEN";
+export const LOGIN_MODAL_CLOSE = "LOGIN_MODAL_CLOSE";
 export const REGISTER_OPEN = "REGISTER_OPEN";
 export const REGISTER_CLOSE = "REGISTER_CLOSE";
-
-
 
 
 export const POST_ADDED = "POST_ADDED";

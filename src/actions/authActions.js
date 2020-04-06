@@ -5,20 +5,23 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGIN_MODAL_OPEN,
+  LOGIN_MODAL_CLOSE,
   GET_PROFILE,
   GET_POSTS,
   // POST_ADDED,
   POST_ERROR,
   AUTH_ERROR,
-  LOGOUT
+  LOGOUT,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
 //Register User
-export const register = ({ email, password }) => async dispatch => {
+export const register = ({ email, password, city }) => async (dispatch) => {
   const body = {
     email: email,
-    password: password
+    password: password,
+    city: city,
   };
   console.log(body);
 
@@ -30,7 +33,7 @@ export const register = ({ email, password }) => async dispatch => {
     console.log(res.data);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(setAlert("Welcome to TP Trader! ", "success"));
   } catch (err) {
@@ -41,53 +44,67 @@ export const register = ({ email, password }) => async dispatch => {
     }
 
     dispatch({
-      type: REGISTER_FAIL
+      type: REGISTER_FAIL,
     });
   }
 };
 
-
 //Login User
-export const login = ({ email, password }) => async dispatch => {
+export const login = ({ email, password }) => async (dispatch) => {
   const config = {
-    headers:{
-      'Content-Type':'application/json'
-    }
-  }
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
   const body = {
     email: email,
-    password: password
+    password: password,
   };
   console.log(body);
 
   try {
     const res = await axios.post(
       "http://localhost:4000/api/auth/login",
-      body, config
+      body,
+      config
     );
     console.log(res.data);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(setAlert("Logged in! ", "success"));
+
+    dispatch({
+      type: LOGIN_MODAL_CLOSE,
+    });
   } catch (err) {
     console.log(err);
     if (err) {
-      console.log(err)
+      console.log(err);
       dispatch(setAlert(`Incorrect email or password`, "danger"));
     }
 
     dispatch({
-      type: LOGIN_FAIL
+      type: LOGIN_FAIL,
     });
   }
 };
 
+export const openLoginModal = () => (dispatch) => {
+  dispatch({
+    type: LOGIN_MODAL_OPEN,
+  });
+};
 
+export const closeLoginModal = () => (dispatch) => {
+  dispatch({
+    type: LOGIN_MODAL_CLOSE,
+  });
+};
 
 //LOAD POSTS
-export const loadPosts = () => async dispatch => {
+export const loadPosts = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -96,36 +113,33 @@ export const loadPosts = () => async dispatch => {
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: POST_ERROR
+      type: POST_ERROR,
     });
   }
 };
 
 //LOAD USER
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get(
-      '/api/users'
-    );
+    const res = await axios.get("/api/users");
 
     dispatch({
       type: GET_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR
+      type: AUTH_ERROR,
     });
   }
 };
-
 
 // //Post Recipe
 // export const postRecipe = ({
@@ -183,8 +197,7 @@ export const loadUser = () => async dispatch => {
 //   }
 // };
 
-
 //LOGOUT
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };

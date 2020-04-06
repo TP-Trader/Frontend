@@ -32,7 +32,7 @@
 .button{
   border: 2px solid rgb(174, 88, 245);
   border-radius: 6px;
-  padding: 10px;
+  padding: 5px 10px;
 
 }
 
@@ -59,6 +59,7 @@
 }
 
 
+
 .login-btn a, .login-btn a:hover, a:focus, .login-btn a:active {
   text-decoration: none;
   color: rgb(174, 88, 245);
@@ -78,4 +79,22 @@
 .copywrite{
   font-size: 10px;
   margin-top: -10px;
+}
+
+#log-out-btn{
+
+}
+
+#profile-btn{
+  color: white;
+  background-color: #6558F5;
+  padding: 10px;
+  border: none;
+}
+
+#create-profile-btn{
+  color: white;
+  background-color: #6558F5;
+  padding: 10px;
+  border: none;
 }
