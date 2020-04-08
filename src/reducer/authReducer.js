@@ -7,6 +7,9 @@ import {
   LOGIN_FAIL,
   LOGIN_MODAL_OPEN,
   LOGIN_MODAL_CLOSE,
+  REG_MODAL_OPEN,
+  REG_MODAL_CLOSE,
+
 
   LOGOUT,
 
@@ -28,7 +31,8 @@ const initialState = {
   user: null,
   posts: null,
   responses: null,
-  loginModalOpen: false
+  loginModalOpen: false,
+  regModalOpen:false
 };
 
 
@@ -48,7 +52,7 @@ export default function(state = initialState, action) {
       console.log(payload)
       return {
         ...state,
-        isAuthenticated: true,
+        // isAuthenticated: true,
         posts: payload
       };
 
@@ -67,7 +71,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...payload,
-        isAuthenticated: true,
+        // isAuthenticated: true,
         loading: false
       };
 
@@ -76,7 +80,7 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: false,
-        redir: true,
+        // redir: true,
         loading: false
       };
 
@@ -97,6 +101,24 @@ export default function(state = initialState, action) {
         ...payload,
         loading: false,
         loginModalOpen:false
+      };
+
+    case REG_MODAL_OPEN:
+      console.log(payload);
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        regModalOpen:true
+      };
+
+    case REG_MODAL_CLOSE:
+      console.log(payload);
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        regModalOpen:false
       };
 
     case LOGIN_SUCCESS:

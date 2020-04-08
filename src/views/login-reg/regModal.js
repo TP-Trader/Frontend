@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alertActions";
-import { register } from "../../actions/authActions";
+import {
+  register,
+  closeRegModal,
+} from "../../actions/authActions";
 import { cities } from "../../data";
 import PropTypes from "prop-types";
 import Alert from "../../layout/alerts/alert";
-import "./login.css";
+import "./register.css";
 
-const RegModal = ({ setAlert, register, auth, history }) => {
+const RegModal = ({ setAlert, register, auth, closeLoginModal, closeRegModal, history }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,22 +41,28 @@ const RegModal = ({ setAlert, register, auth, history }) => {
     }
   };
 
-  console.log(formData)
+  console.log(formData);
 
   // console.log(`auth.redir: ${auth.redir}`)
   //auth.redir && setTimeout(() => history.push('/login'), 400)
 
   return (
-    <div className="loginModal-off">
-      <div className="loginModal-container"></div>
+    <div className={auth.regModalOpen===true? "regModal" :"regModal-off"}>
+      <div className="regModal-container"></div>
       <div className="modalbox">
-        <form className="modal-form" onSubmit={(e) => onSubmit(e)}>
+        <form className="reg-modal-form" onSubmit={(e) => onSubmit(e)}>
+          <p className="ex" onClick={closeRegModal}>
+            <i class="fas fa-window-close"></i>
+          </p>
           <Alert />
           Sign-Up
-          
-          <div className="form-group">
-            <select name="city" onChange={onChange} class="form-control">
-              <option value="">Choose a City</option>
+          <div className="regcitydrop-container">
+            <select
+              name="city"
+              onChange={e => onChange(e)}
+              class="regcitydrop form-group"
+            >
+              <option value="_">Choose a City</option>
               {places.map((city, i) => (
                 <option value={city} key={i}>
                   {city}
@@ -69,6 +78,7 @@ const RegModal = ({ setAlert, register, auth, history }) => {
               name="email"
               value={email}
               onChange={(e) => onChange(e)}
+              className="reg-input"
               required
             />
           </div>
@@ -80,6 +90,8 @@ const RegModal = ({ setAlert, register, auth, history }) => {
               minLength="8"
               value={password}
               onChange={(e) => onChange(e)}
+              className="reg-input"
+              id="pwr1"
               required
             />
           </div>
@@ -91,13 +103,15 @@ const RegModal = ({ setAlert, register, auth, history }) => {
               minLength="8"
               value={password2}
               onChange={(e) => onChange(e)}
+              className="reg-input"
+              id="pwr2"
               required
             />
           </div>
           <div className="login-modal-btn">
-            <input type="submit" value="register" id="submit"/>
-             
-            <p id="sign-up">Cancel</p>
+            <input type="submit" value="register" id="submit" />
+
+            <p id="sign-up" onClick={closeRegModal}>Cancel</p>
           </div>
         </form>
       </div>
@@ -115,6 +129,9 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, { setAlert, register, alert })(
-  RegModal
-);
+export default connect(mapStateToProps, {
+  setAlert,
+  register,
+  alert,
+  closeRegModal,
+})(RegModal);

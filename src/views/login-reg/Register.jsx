@@ -29,8 +29,8 @@ const Register = ({setAlert, register, auth, history}) => {
     }
   };
 
-  console.log(`auth.redir: ${auth.redir}`)
-  auth.redir && setTimeout(() => history.push('/login'), 400)
+  // console.log(`auth.redir: ${auth.redir}`)
+  // auth.redir && setTimeout(() => history.push('/login'), 400)
 
   return (
     <Fragment>

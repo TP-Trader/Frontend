@@ -1,0 +1,95 @@
+.regModal {
+  z-index: 101;
+  position: fixed;
+}
+
+.regModal-off {
+  display: none;
+}
+
+.regModal-container {
+  position: fixed;
+  background-color: black;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  z-index: 101;
+}
+
+.regcitydrop-container {
+  width: 200px;
+}
+
+.modalbox {
+  height: 300px;
+  width: 100%;
+  position: fixed;
+  top: 25%;
+  z-index: 102;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.reg-modal-form {
+  background-color: whitesmoke;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal-btn {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+#submit {
+  width: 80px;
+  height: 35px;
+  border: none;
+  background-color: #6558f5;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-weight: 500;
+  color: white;
+}
+
+#sign-up {
+  width: 80px;
+  color: white;
+  font-weight: 500;
+  border: none;
+  background-color: #6558f5;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.ex {
+  position: relative;
+  bottom: -10px;
+  left: 125px;
+  font-weight: bold;
+  color: #6558f5;
+  font-size: 25px;
+}
+#pwr1 {
+  margin-top: 15px;
+}
+
+#pwr2 {
+  margin-top: 15px;
+}
+
+.reg-input {
+  border-radius: 5px;
+  padding: 3px;
+}

@@ -3,10 +3,10 @@ import "./footer.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logout, openLoginModal  } from "../../actions/authActions";
+import { logout, openLoginModal, closeRegModal, openRegModal  } from "../../actions/authActions";
 
 
-const Footer = ({ auth, logout, history, openLoginModal }) => {
+const Footer = ({ auth, logout, history, openLoginModal, openRegModal }) => {
   useEffect(() => {
     checkToken();
   }, []);
@@ -37,9 +37,9 @@ const Footer = ({ auth, logout, history, openLoginModal }) => {
             
               <p id="log-in" onClick={openLoginModal} className="button">Log-in</p>
            
-            <Link  onClick={checkToken} to="/register">
-              <p id="register" className="button">Sign-Up</p>
-            </Link>
+           
+              <p id="register" className="button" onClick={openRegModal}>Sign-Up</p>
+           
           </div>
         )}
        
@@ -59,4 +59,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, { logout, openLoginModal  })(Footer);
+export default connect(mapStateToProps, { logout, openLoginModal, openRegModal  })(Footer);

@@ -7,6 +7,8 @@ import {
   LOGIN_FAIL,
   LOGIN_MODAL_OPEN,
   LOGIN_MODAL_CLOSE,
+  REG_MODAL_OPEN,
+  REG_MODAL_CLOSE,
   GET_PROFILE,
   GET_POSTS,
   // POST_ADDED,
@@ -36,11 +38,17 @@ export const register = ({ email, password, city }) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Welcome to TP Trader! ", "success"));
+    dispatch({
+      type: REG_MODAL_CLOSE,
+    });
+    dispatch({
+      type: LOGIN_MODAL_OPEN,
+    });
   } catch (err) {
     // const errors = err.response.data.errors;
-    console.log(err);
     if (err) {
       dispatch(setAlert("Email already exists.", "danger"));
+      console.log(err);
     }
 
     dispatch({
@@ -95,11 +103,29 @@ export const openLoginModal = () => (dispatch) => {
   dispatch({
     type: LOGIN_MODAL_OPEN,
   });
+  dispatch({
+    type: REG_MODAL_CLOSE,
+  });
 };
 
 export const closeLoginModal = () => (dispatch) => {
   dispatch({
     type: LOGIN_MODAL_CLOSE,
+  });
+};
+
+export const openRegModal = () => (dispatch) => {
+  dispatch({
+    type: REG_MODAL_OPEN,
+  });
+  dispatch({
+    type: LOGIN_MODAL_CLOSE,
+  });
+};
+
+export const closeRegModal = () => (dispatch) => {
+  dispatch({
+    type: REG_MODAL_CLOSE,
   });
 };
 

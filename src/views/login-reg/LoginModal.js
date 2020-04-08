@@ -3,12 +3,23 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alertActions";
-import { login,  } from "../../actions/authActions";
+import {
+  login,
+  closeLoginModal,
+  openRegModal,
+} from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Alert from "../../layout/alerts/alert";
 import "./login.css";
 
-const LoginModal = ({ setAlert, login, auth, history }) => {
+const LoginModal = ({
+  setAlert,
+  login,
+  auth,
+  history,
+  closeLoginModal,
+  openRegModal,
+}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,10 +40,15 @@ const LoginModal = ({ setAlert, login, auth, history }) => {
   // auth.isAuthenticated && setTimeout(() => history.push('/'), 400)
 
   return (
-    <div className={auth.loginModalOpen === true ? "loginModal" :"loginModal-off"}>
+    <div
+      className={auth.loginModalOpen === true ? "loginModal" : "loginModal-off"}
+    >
       <div className="loginModal-container"></div>
       <div className="modalbox">
         <form className="modal-form" onSubmit={(e) => onSubmit(e)}>
+          <p className="ex" onClick={closeLoginModal}>
+            <i class="fas fa-window-close"></i>
+          </p>
           Login
           <Alert />
           <div>
@@ -42,6 +58,7 @@ const LoginModal = ({ setAlert, login, auth, history }) => {
               name="email"
               value={email}
               onChange={(e) => onChange(e)}
+              className="login-input"
               required
             />
           </div>
@@ -53,17 +70,17 @@ const LoginModal = ({ setAlert, login, auth, history }) => {
               minLength="8"
               value={password}
               onChange={(e) => onChange(e)}
+              className="login-input"
+              id="pw"
               required
             />
           </div>
           <div className="login-modal-btn">
             <input type="submit" value="Login" id="submit" />
-            <Link to="/register" >
-              <p id="sign-up">
-                Sign Up
-              </p>
-              
-            </Link>
+
+            <p id="sign-up" onClick={openRegModal}>
+              Sign Up
+            </p>
           </div>
         </form>
       </div>
@@ -81,4 +98,10 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, { setAlert, login, alert })(LoginModal);
+export default connect(mapStateToProps, {
+  setAlert,
+  login,
+  alert,
+  closeLoginModal,
+  openRegModal,
+})(LoginModal);
