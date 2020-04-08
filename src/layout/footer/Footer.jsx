@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "./footer.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logout, openLoginModal, closeRegModal, openRegModal  } from "../../actions/authActions";
+import { logout, openLoginModal, openRegModal  } from "../../actions/authActions";
 
 
-const Footer = ({ auth, logout, history, openLoginModal, openRegModal }) => {
+const Footer = ({ auth, logout, openLoginModal, openRegModal }) => {
   useEffect(() => {
     checkToken();
   }, []);
@@ -14,8 +14,7 @@ const Footer = ({ auth, logout, history, openLoginModal, openRegModal }) => {
   const checkToken = () => {
     !localStorage.token && logout();
   };
-
-  
+ 
 
   return (
     <div className="footer-container">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Moment from "react-moment";
 import RadioButton from "../../layout/buttons/RadioButton";
 import "./profile.css";
@@ -39,7 +39,9 @@ class Profile extends Component {
     });
   };
 
+
   componentDidMount = () => {
+    console.log(this.props.auth.isAuthenticated)
     this.props.loadPosts();
   };
 
